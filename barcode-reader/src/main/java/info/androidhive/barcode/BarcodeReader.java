@@ -522,7 +522,7 @@ public class BarcodeReader extends Fragment implements View.OnTouchListener, Bar
          */
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
-            mCameraSource.doZoom(detector.getScaleFactor());
+//            mCameraSource.doZoom(detector.getScaleFactor());
         }
     }
 
