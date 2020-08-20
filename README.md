@@ -1,4 +1,4 @@
-Barcode Reader - Google Mobile Vision
+Barcode Reader - Google Mobile Vision Forked From https://github.com/ravi8x/Barcode-Reader
 ===================
 Android Barcode Reader library using **Google Mobile Vision.** This library is built on top of google mobile vision sample adding improvements and fixing few bugs.
 
@@ -9,18 +9,28 @@ Android Barcode Reader library using **Google Mobile Vision.** This library is b
 
 How to Use
 -------------
-1. Include the barcode reader dependency in app's **build.gradle**
+1. Add it in your root build.gradle at the end of repositories: 
+```gradle
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+2. Include the barcode reader dependency in app's **build.gradle**
 ```gradle
 dependencies {
     // google mobile vision
     implementation 'com.google.android.gms:play-services-vision:11.0.2'
 
     // barcode reader
-    implementation 'info.androidhive:barcode-reader:1.1.5'
+    implementation 'com.github.wpsaputra:Barcode-Reader:master-SNAPSHOT'
 }
 ```
 
-2. Add the barcode reader fragment to your activity
+3. Add the barcode reader fragment to your activity
 ```xml
 <fragment
         android:id="@+id/barcode_fragment"
@@ -31,7 +41,7 @@ dependencies {
         app:use_flash="false" />
 ```
 
-3. Implement your activity from <code>BarcodeReader.BarcodeReaderListener</code> and override the necessary methods.
+4. Implement your activity from <code>BarcodeReader.BarcodeReaderListener</code> and override the necessary methods.
 ```java
 public class MainActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
 
