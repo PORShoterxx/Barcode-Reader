@@ -136,35 +136,35 @@ public class CameraSourcePreview extends ViewGroup {
         int width = getWidth();
         int height = getHeight();
 
-        if (mCameraSource != null) {
-            Size size = mCameraSource.getPreviewSize();
-            if (size != null) {
-                width = size.getWidth();
-                height = size.getHeight();
-            }
-        }
-
-        int layoutWidth = right - left;
-        int layoutHeight = bottom - top;
-
-        // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
-        if (isPortraitMode()) {
-            int tmp = width;
-            //noinspection SuspiciousNameCombination
-            width = height;
-            height = tmp;
-        }
-
-        int childWidth = layoutWidth;
-        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
-
-        if (isPortraitMode()) {
-            childHeight = layoutHeight;
-            childWidth = (int) (((float) layoutHeight / (float) height) * width);
-        }
+//        if (mCameraSource != null) {
+//            Size size = mCameraSource.getPreviewSize();
+//            if (size != null) {
+//                width = size.getWidth();
+//                height = size.getHeight();
+//            }
+//        }
+//
+//        int layoutWidth = right - left;
+//        int layoutHeight = bottom - top;
+//
+//        // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
+//        if (isPortraitMode()) {
+//            int tmp = width;
+//            //noinspection SuspiciousNameCombination
+//            width = height;
+//            height = tmp;
+//        }
+//
+//        int childWidth = layoutWidth;
+//        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
+//
+//        if (isPortraitMode()) {
+//            childHeight = layoutHeight;
+//            childWidth = (int) (((float) layoutHeight / (float) height) * width);
+//        }
 
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, childWidth, childHeight);
+            getChildAt(i).layout(0, 0, width, height);
         }
 
         try {
