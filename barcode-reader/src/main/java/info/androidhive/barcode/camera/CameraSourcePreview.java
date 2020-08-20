@@ -130,31 +130,77 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
+//    @Override
+//    protected void onLayout (boolean changed, int left, int top, int right, int bottom)
+//    {
+//        int width = getWidth();
+//        int height = getHeight();
+//
+////        if (mCameraSource != null) {
+////            Size size = mCameraSource.getPreviewSize();
+////            if (size != null) {
+////                width = size.getWidth();
+////                height = size.getHeight();
+////            }
+////        }
+////
+////        int layoutWidth = right - left;
+////        int layoutHeight = bottom - top;
+////
+////        // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
+////        if (isPortraitMode()) {
+////            int tmp = width;
+////            //noinspection SuspiciousNameCombination
+////            width = height;
+////            height = tmp;
+////        }
+////
+////        int childWidth = layoutWidth;
+////        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
+////
+////        if (isPortraitMode()) {
+////            childHeight = layoutHeight;
+////            childWidth = (int) (((float) layoutHeight / (float) height) * width);
+////        }
+//
+//        for (int i = 0; i < getChildCount(); ++i) {
+//            getChildAt(i).layout(0, 0, width, height);
+//        }
+//
+//        try {
+//            startIfReady();
+//        } catch (SecurityException se) {
+//            Log.e(TAG, "Do not have permission to start the camera", se);
+//        } catch (IOException e) {
+//            Log.e(TAG, "Could not start camera source.", e);
+//        }
+//    }
+
     @Override
     protected void onLayout (boolean changed, int left, int top, int right, int bottom)
     {
         int width = getWidth();
         int height = getHeight();
 
-//        if (mCameraSource != null) {
-//            Size size = mCameraSource.getPreviewSize();
-//            if (size != null) {
-//                width = size.getWidth();
-//                height = size.getHeight();
-//            }
-//        }
-//
-//        int layoutWidth = right - left;
-//        int layoutHeight = bottom - top;
-//
-//        // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
-//        if (isPortraitMode()) {
-//            int tmp = width;
-//            //noinspection SuspiciousNameCombination
-//            width = height;
-//            height = tmp;
-//        }
-//
+        if (mCameraSource != null) {
+            Size size = mCameraSource.getPreviewSize();
+            if (size != null) {
+                width = size.getWidth();
+                height = size.getHeight();
+                // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
+                if (isPortraitMode()) {
+                    int tmp = width;
+                    //noinspection SuspiciousNameCombination
+                    width = height;
+                    height = tmp;
+                }
+            }
+        }
+
+        int layoutWidth = right - left;
+        int layoutHeight = bottom - top;
+
+
 //        int childWidth = layoutWidth;
 //        int childHeight = (int) (((float) layoutWidth / (float) width) * height);
 //
@@ -163,8 +209,15 @@ public class CameraSourcePreview extends ViewGroup {
 //            childWidth = (int) (((float) layoutHeight / (float) height) * width);
 //        }
 
+        float ratio =  ((float)Math.max(layoutHeight, layoutWidth))/(float)Math.min(width, height);
+        int childWidth = (int) ((float) width * ratio);
+        int childHeight = (int) ((float) height * ratio);
+        int childLeft = (childWidth>layoutWidth)?(childWidth-layoutWidth)/-2:0;
+        int childTop = (childHeight>layoutHeight)?(childHeight-layoutHeight)/-2:0;
+
+
         for (int i = 0; i < getChildCount(); ++i) {
-            getChildAt(i).layout(0, 0, width, height);
+            getChildAt(i).layout(childLeft, childTop, childWidth, childHeight);
         }
 
         try {
