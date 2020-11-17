@@ -1099,9 +1099,13 @@ public class CameraSource {
          */
         @SuppressLint("Assert")
         void release() {
-            assert (mProcessingThread.getState() == State.TERMINATED);
-            mDetector.release();
-            mDetector = null;
+			if (mProcessingThread != null)
+				assert (mProcessingThread.getState() == State.TERMINATED);
+            if (mDetector != null)
+			{
+				mDetector.release();
+				mDetector = null;
+			}
         }
 
         /**
