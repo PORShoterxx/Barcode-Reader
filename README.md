@@ -1,4 +1,4 @@
-Barcode Reader - Google Mobile Vision Forked From https://github.com/ravi8x/Barcode-Reader
+Barcode Reader - Google Mobile Vision Forked From https://github.com/wpsaputra/Barcode-Reader
 ===================
 Android Barcode Reader library using **Google Mobile Vision.** This library is built on top of google mobile vision sample adding improvements and fixing few bugs.
 Differences from original : **Fix scretched camera (use fullscreen activity), remove camera zoom by default.**
